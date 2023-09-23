@@ -3,7 +3,9 @@ package com.gnxcode.pitzza.persitence.entity.audit;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
@@ -20,6 +22,16 @@ public class AuditableEntity {
     @JsonIgnore
     private LocalDateTime modifiedDate;
 
+    @Column(name = "create_by")
+    @CreatedBy
+    @JsonIgnore
+    private String createdBy;
+
+    @Column(name = "modified_by")
+    @LastModifiedBy
+    @JsonIgnore
+    private String modifiedBy;
+
     public LocalDateTime getCreatedDate() {
         return createdDate;
     }
@@ -34,5 +46,21 @@ public class AuditableEntity {
 
     public void setModifiedDate(LocalDateTime modifiedDate) {
         this.modifiedDate = modifiedDate;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public String getModifiedBy() {
+        return modifiedBy;
+    }
+
+    public void setModifiedBy(String modifiedBy) {
+        this.modifiedBy = modifiedBy;
     }
 }

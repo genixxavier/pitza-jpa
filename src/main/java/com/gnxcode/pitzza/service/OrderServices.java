@@ -5,6 +5,7 @@ import com.gnxcode.pitzza.persitence.projection.OrderSummary;
 import com.gnxcode.pitzza.persitence.repository.OrderRepository;
 import com.gnxcode.pitzza.service.dto.RandomOrderDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,6 +41,7 @@ public class OrderServices {
         return orderRepository.findAllByMethodIn(methods);
     }
 
+    @Secured("ROLE_ADMIN")
     public List<OrderEntity> getCustomerOrders(String idCustomer){
         return orderRepository.findCustomerOrders(idCustomer);
     }
